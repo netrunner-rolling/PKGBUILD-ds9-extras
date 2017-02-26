@@ -1,0 +1,37 @@
+# $Id$
+# Maintainer: James Kittsmiller (AJSlye) <james@nulogicsystems.com>
+
+pkgname=plasma5-applets-radiotray
+pkgver=1.0
+pkgrel=1
+pkgdesc="Plasmoid to listen to online radio stations"
+arch=('x86_64')
+url="https://github.com/plasma-extensions/plasma-widget-radiotray"
+license=('GPL')
+groups=('ds9-extras')
+depends=('qt5-base' 'qt5-declarative' 'plasma-framework' 'vlc-nightly')
+makedepends=('cmake' 'git' 'extra-cmake-modules')
+source=('git://github.com/plasma-extensions/plasma-widget-radiotray')
+sha1sums=('SKIP')
+
+prepare() {
+        cd "$srcdir/plasma-widget-radiotray"
+        rm -rf build
+        mkdir -p build
+}
+
+build() {
+        cd "$srcdir/plasma-widget-radiotray/build"
+        
+        cmake .. \
+    -DCMAKE_INSTALL_PREFIX=/usr \
+    -DCMAKE_BUILD_TYPE=Release \
+    -DKDE_INSTALL_LIBDIR=lib \
+    -DKDE_INSTALL_USE_QT_SYS_PATHS=ON
+        make
+}
+
+package() {
+        cd "$srcdir/plasma-widget-radiotray/build"
+        make DESTDIR="${pkgdir}/" install
+}
