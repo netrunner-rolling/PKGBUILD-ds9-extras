@@ -10,7 +10,6 @@ pkgdesc="A graphical grub2 settings manager"
 url="https://launchpad.net/grub-customizer"
 arch=('i686' 'x86_64')
 license=("GPL3")
-groups=('ds9-extras')
 depends=('gtkmm3' 'openssl' 'hicolor-icon-theme' 'grub-common' 'libarchive' )
 optdepends=('hwinfo')
 makedepends=('cmake')

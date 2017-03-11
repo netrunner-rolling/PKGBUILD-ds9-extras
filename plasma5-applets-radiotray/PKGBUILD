@@ -14,6 +14,11 @@ makedepends=('cmake' 'git' 'extra-cmake-modules')
 source=('git://github.com/plasma-extensions/plasma-widget-radiotray')
 sha1sums=('SKIP')
 
+pkgver() {
+cd "$srcdir/plasma-widget-radiotray"
+printf "0+git`date +%Y%m%d`.%s"  "$(git rev-parse --short HEAD)"
+}
+
 prepare() {
         cd "$srcdir/plasma-widget-radiotray"
         rm -rf build

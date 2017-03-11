@@ -3,10 +3,10 @@
 # Maintainer: James Kittsmiller (AJSlye) <james@nulogicsystems.com>
 
 _pkgname=samba-mounter
-pkgname=samba-mounter-git
-pkgver=118.5b9a6d7
+pkgname=kcm-samba-mounter
+pkgver=1.0
 pkgrel=1
-pkgdesc="User space mount tool for samba"
+pkgdesc="KDE control module mount tool for samba"
 url="https://cgit.kde.org/scratch/afiestas/samba-mounter.git"
 arch=('i686' 'x86_64')
 license=('GPL')
@@ -18,12 +18,12 @@ source=("git://anongit.kde.org/scratch/afiestas/samba-mounter.git")
 sha256sums=('SKIP')
 
 pkgver() {
-	cd "$srcdir/$_pkgname"
-	echo "$(git rev-list --count HEAD).$(git describe --always)"
+cd "$srcdir/$_pkgname"
+printf "0+git`date +%Y%m%d`.%s"  "$(git rev-parse --short HEAD)"
 }
 
 build() {
-	cd "$srcdir"
+	cd "$srcdir/$_pkgname"
 	mkdir -p build
 	cd build
 
@@ -32,7 +32,7 @@ build() {
 }
 
 package() {
-	cd "$srcdir/build"
+	cd "$srcdir/$_pkgname/build"
 
 	make DESTDIR="$pkgdir" install
 }

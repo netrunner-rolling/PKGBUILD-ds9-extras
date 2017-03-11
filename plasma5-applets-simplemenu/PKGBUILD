@@ -2,7 +2,7 @@
 # Maintainer: James Kittsmiller (AJSlye) <james@nulogicsystems.com>
 
 pkgname=plasma5-applets-simplemenu
-pkgver=1.0.1
+pkgver=1.0
 pkgrel=1
 pkgdesc="Simple menu launcher, similar to the one on Chrome OS"
 arch=('x86_64')
@@ -14,6 +14,11 @@ depends=('qt5-base' 'qt5-x11extras' 'plasma-workspace' 'ki18n' 'knotifications' 
 makedepends=('cmake' 'git' 'extra-cmake-modules')
 source=(${pkgname}::git://anongit.kde.org/scratch/hein/simplemenu.git)
 sha1sums=('SKIP')
+
+pkgver() {
+cd "$srcdir/plasma-widget-radiotray"
+printf "0+git`date +%Y%m%d`.%s"  "$(git rev-parse --short HEAD)"
+}
 
 prepare() {
         cd "$srcdir/${pkgname}"
