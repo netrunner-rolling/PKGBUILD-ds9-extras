@@ -2,7 +2,7 @@
 # Maintainer: James Kittsmiller (AJSlye) <james@nulogicsystems.com>
 
 pkgname=kcm-plasma-services
-pkgver=$(date +%Y.%m)
+pkgver=0+git20170311.a4db58f
 pkgrel=1
 pkgdesc='Easily turn on/off certain Plasma Services'
 arch=('i686' 'x86_64')
@@ -14,6 +14,11 @@ makedepends=('git' 'extra-cmake-modules' 'kdoctools' 'python')
 conflicts=('kdebase-workspace')
 source=('git://github.com/ds9-extras/kcm-plasma-services')
 md5sums=('SKIP')
+
+pkgver() {
+cd "$srcdir/$pkgname"
+printf "0+git`date +%Y%m%d`.%s"  "$(git rev-parse --short HEAD)"
+}
 
 prepare() {
   mkdir -p build
@@ -28,10 +33,6 @@ build() {
     -DKDE_INSTALL_USE_QT_SYS_PATHS=ON \
     -DBUILD_TESTING=OFF
   make
-}
-
-pkgver() {
-date +%Y.%m.%d
 }
 
 package() {

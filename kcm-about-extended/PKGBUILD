@@ -2,7 +2,7 @@
 # Maintainer: James Kittsmiller (AJSlye) <james@nulogicsystems.com>
 
 pkgname=kcm-about-extended
-pkgver=$(date +%Y.%m)
+pkgver=0+git20170311.e4fb74b
 pkgrel=1
 pkgdesc='Extended version of the about-distro module'
 arch=('i686' 'x86_64')
@@ -14,6 +14,11 @@ makedepends=('git' 'extra-cmake-modules' 'kdoctools' 'python')
 conflicts=('kdebase-workspace')
 source=('git://github.com/ds9-extras/kcm-about-extended')
 md5sums=('SKIP')
+
+pkgver() {
+cd "$srcdir/$pkgname"
+printf "0+git`date +%Y%m%d`.%s"  "$(git rev-parse --short HEAD)"
+}
 
 prepare() {
   mkdir -p build
