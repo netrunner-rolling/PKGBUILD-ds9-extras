@@ -16,7 +16,7 @@ source=(${pkgname}::git://anongit.kde.org/scratch/hein/simplemenu.git)
 sha1sums=('SKIP')
 
 pkgver() {
-cd "$srcdir/plasma-widget-radiotray"
+cd "$srcdir/${pkgname}"
 printf "0+git`date +%Y%m%d`.%s"  "$(git rev-parse --short HEAD)"
 }
 
