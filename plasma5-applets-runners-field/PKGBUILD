@@ -1,0 +1,42 @@
+# $Id$
+# Maintainer: James Kittsmiller (AJSlye) <james@nulogicsystems.com>
+
+pkgname=plasma5-applets-runners-field
+pkgver=0+git20170311.2e42b65
+pkgrel=1
+pkgdesc="Plasmoid that allows krunner search field to be placed inside panel as widget (like Cortana search field of Windows 10)"
+arch=('x86_64')
+url="https://github.com/plasma-extensions/plasma-widget-runners-field"
+license=('GPL')
+groups=('ds9-extras')
+depends=('krunner' 'plasma-framework' 'qt5-base' 'qt5-declarative')
+makedepends=('cmake' 'git' 'extra-cmake-modules')
+source=('git://github.com/plasma-extensions/plasma-widget-runners-field')
+sha1sums=('SKIP')
+
+pkgver() {
+cd "$srcdir/plasma-widget-runners-field"
+printf "0+git`date +%Y%m%d`.%s"  "$(git rev-parse --short HEAD)"
+}
+
+prepare() {
+        cd "$srcdir/plasma-widget-runners-field"
+        rm -rf build
+        mkdir -p build
+}
+
+build() {
+        cd "$srcdir/plasma-widget-runners-field/build"
+        
+        cmake .. \
+    -DCMAKE_INSTALL_PREFIX=/usr \
+    -DCMAKE_BUILD_TYPE=Release \
+    -DKDE_INSTALL_LIBDIR=lib \
+    -DKDE_INSTALL_USE_QT_SYS_PATHS=ON
+        make
+}
+
+package() {
+        cd "$srcdir/plasma-widget-runners-field/build"
+        make DESTDIR="${pkgdir}/" install
+}

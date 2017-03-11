@@ -1,0 +1,42 @@
+# $Id$
+# Maintainer: James Kittsmiller (AJSlye) <james@nulogicsystems.com>
+
+pkgname=plasma5-applets-quick-controls
+pkgver=0+git20170311.325c1a2
+pkgrel=1
+pkgdesc="Plasmoid that gives direct access to settings like wallpaper, wifi, sound, etc."
+arch=('x86_64')
+url="https://github.com/plasma-extensions/plasma-widget-quick-controls"
+license=('GPL')
+groups=('ds9-extras')
+depends=('kconfig' 'kdeclarative' 'kdelibs4support' 'kwidgetsaddons' 'kwindowsystem' 'qt5-x11extras' 'kdbusaddons' 'libxcursor' 'plasma-framework' 'qt5-base' 'qt5-declarative')
+makedepends=('cmake' 'git' 'extra-cmake-modules')
+source=('git://github.com/plasma-extensions/plasma-widget-quick-controls')
+sha1sums=('SKIP')
+
+pkgver() {
+cd "$srcdir/plasma-widget-quick-controls"
+printf "0+git`date +%Y%m%d`.%s"  "$(git rev-parse --short HEAD)"
+}
+
+prepare() {
+        cd "$srcdir/plasma-widget-quick-controls"
+        rm -rf build
+        mkdir -p build
+}
+
+build() {
+        cd "$srcdir/plasma-widget-quick-controls/build"
+        
+        cmake .. \
+    -DCMAKE_INSTALL_PREFIX=/usr \
+    -DCMAKE_BUILD_TYPE=Release \
+    -DKDE_INSTALL_LIBDIR=lib \
+    -DKDE_INSTALL_USE_QT_SYS_PATHS=ON
+        make
+}
+
+package() {
+        cd "$srcdir/plasma-widget-quick-controls/build"
+        make DESTDIR="${pkgdir}/" install
+}

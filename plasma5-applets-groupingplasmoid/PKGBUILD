@@ -1,0 +1,42 @@
+# $Id$
+# Maintainer: James Kittsmiller (AJSlye) <james@nulogicsystems.com>
+
+pkgname=plasma5-applets-groupingplasmoid
+pkgver=0+git20170311.7fcd4ae
+pkgrel=1
+pkgdesc="Plasmoid that gives direct access to settings like wallpaper, wifi, sound, etc."
+arch=('x86_64')
+url="https://cgit.kde.org/scratch/davidedmundson/groupingplasmoid"
+license=('GPL')
+groups=('ds9-extras')
+depends=('ki18n' 'kiconthemes' 'kxmlgui' 'plasma-framework' 'qt5-base' 'qt5-declarative')
+makedepends=('cmake' 'git' 'extra-cmake-modules')
+source=('git://anongit.kde.org/scratch/davidedmundson/groupingplasmoid')
+sha1sums=('SKIP')
+
+pkgver() {
+cd "$srcdir/groupingplasmoid"
+printf "0+git`date +%Y%m%d`.%s"  "$(git rev-parse --short HEAD)"
+}
+
+prepare() {
+        cd "$srcdir/groupingplasmoid"
+        rm -rf build
+        mkdir -p build
+}
+
+build() {
+        cd "$srcdir/groupingplasmoid/build"
+        
+        cmake .. \
+    -DCMAKE_INSTALL_PREFIX=/usr \
+    -DCMAKE_BUILD_TYPE=Release \
+    -DKDE_INSTALL_LIBDIR=lib \
+    -DKDE_INSTALL_USE_QT_SYS_PATHS=ON
+        make
+}
+
+package() {
+        cd "$srcdir/groupingplasmoid/build"
+        make DESTDIR="${pkgdir}/" install
+}
