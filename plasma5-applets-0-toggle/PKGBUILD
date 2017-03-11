@@ -1,32 +1,32 @@
 # $Id$
 # Maintainer: James Kittsmiller (AJSlye) <james@nulogicsystems.com>
 
-pkgname=plasma5-applets-groupingplasmoid
-pkgver=0+git20170311.7fcd4ae
+pkgname=plasma5-applets-0-toggle
+pkgver=0+git20170311.21b0cf8
 pkgrel=1
-pkgdesc="Plasmoid to group desktop widgets together"
+pkgdesc="Plasmoid to control ZeroNet on your Plasma 5 Desktop"
 arch=('x86_64')
-url="https://cgit.kde.org/scratch/davidedmundson/groupingplasmoid"
+url="https://github.com/ds9-extras/0-toggle"
 license=('GPL')
 groups=('ds9-extras')
-depends=('ki18n' 'kiconthemes' 'kxmlgui' 'plasma-framework' 'qt5-base' 'qt5-declarative')
+depends=('karchive' 'kcoreaddons' 'ki18n' 'kio' 'plasma-framework' 'packagekit-qt5' 'qt5-base' 'qt5-declarative')
 makedepends=('cmake' 'git' 'extra-cmake-modules')
-source=('git://anongit.kde.org/scratch/davidedmundson/groupingplasmoid')
+source=('git://github.com/ds9-extras/0-toggle')
 sha1sums=('SKIP')
 
 pkgver() {
-cd "$srcdir/groupingplasmoid"
+cd "$srcdir/0-toggle"
 printf "0+git`date +%Y%m%d`.%s"  "$(git rev-parse --short HEAD)"
 }
 
 prepare() {
-        cd "$srcdir/groupingplasmoid"
+        cd "$srcdir/0-toggle"
         rm -rf build
         mkdir -p build
 }
 
 build() {
-        cd "$srcdir/groupingplasmoid/build"
+        cd "$srcdir/0-toggle/build"
         
         cmake .. \
     -DCMAKE_INSTALL_PREFIX=/usr \
@@ -37,6 +37,6 @@ build() {
 }
 
 package() {
-        cd "$srcdir/groupingplasmoid/build"
+        cd "$srcdir/0-toggle/build"
         make DESTDIR="${pkgdir}/" install
 }

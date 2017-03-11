@@ -4,7 +4,7 @@
 pkgname=plasma5-applets-notification-sidebar
 pkgver=0+git20170311.bc91173
 pkgrel=1
-pkgdesc="An extended notification widget that resembles a sidebar (like Win10 actionbar) to quickly launch Spectacle from the system tray)"
+pkgdesc="An extended notification widget that resembles a sidebar (like Win10 actionbar)"
 arch=('x86_64')
 url="https://github.com/plasma-extensions/plasma-widget-notification-sidebar"
 license=('GPL')

@@ -4,7 +4,7 @@
 pkgname=plasma5-applets-paparazzi
 pkgver=0+git20170311.148c1ad
 pkgrel=1
-pkgdesc="Plasmoid to quickly launch Spectacle from the system tray)"
+pkgdesc="Plasmoid to quickly launch Spectacle from the system tray"
 arch=('x86_64')
 url="https://github.com/plasma-extensions/plasma-widget-paparazzi"
 license=('GPL')

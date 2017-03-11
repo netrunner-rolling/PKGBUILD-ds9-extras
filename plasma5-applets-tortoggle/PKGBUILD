@@ -1,32 +1,32 @@
 # $Id$
 # Maintainer: James Kittsmiller (AJSlye) <james@nulogicsystems.com>
 
-pkgname=plasma5-applets-groupingplasmoid
-pkgver=0+git20170311.7fcd4ae
+pkgname=plasma5-applets-tortoggle
+pkgver=0+git20170311.019ae87
 pkgrel=1
-pkgdesc="Plasmoid to group desktop widgets together"
+pkgdesc="Plasmoid to control Tor on your Plasma 5 Desktop"
 arch=('x86_64')
-url="https://cgit.kde.org/scratch/davidedmundson/groupingplasmoid"
+url="https://github.com/ds9-extras/tortoggle"
 license=('GPL')
 groups=('ds9-extras')
-depends=('ki18n' 'kiconthemes' 'kxmlgui' 'plasma-framework' 'qt5-base' 'qt5-declarative')
+depends=('ki18n' 'kiconthemes' 'kxmlgui' 'plasma-framework' 'packagekit-qt5' 'qt5-base' 'qt5-declarative')
 makedepends=('cmake' 'git' 'extra-cmake-modules')
-source=('git://anongit.kde.org/scratch/davidedmundson/groupingplasmoid')
+source=('git://github.com/ds9-extras/tortoggle')
 sha1sums=('SKIP')
 
 pkgver() {
-cd "$srcdir/groupingplasmoid"
+cd "$srcdir/tortoggle"
 printf "0+git`date +%Y%m%d`.%s"  "$(git rev-parse --short HEAD)"
 }
 
 prepare() {
-        cd "$srcdir/groupingplasmoid"
+        cd "$srcdir/tortoggle"
         rm -rf build
         mkdir -p build
 }
 
 build() {
-        cd "$srcdir/groupingplasmoid/build"
+        cd "$srcdir/tortoggle/build"
         
         cmake .. \
     -DCMAKE_INSTALL_PREFIX=/usr \
@@ -37,6 +37,6 @@ build() {
 }
 
 package() {
-        cd "$srcdir/groupingplasmoid/build"
+        cd "$srcdir/tortoggle/build"
         make DESTDIR="${pkgdir}/" install
 }
