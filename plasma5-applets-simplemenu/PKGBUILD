@@ -2,23 +2,18 @@
 # Maintainer: James Kittsmiller (AJSlye) <james@nulogicsystems.com>
 
 pkgname=plasma5-applets-simplemenu
-pkgver=1.0
+pkgver=1.0.1
 pkgrel=1
 pkgdesc="Simple menu launcher, similar to the one on Chrome OS"
 arch=('x86_64')
 url="https://quickgit.kde.org/?p=scratch%2Fhein%2Fsimplemenu.git"
 license=('GPL')
-groups=('ds9-extras')
+group=('plasma5-applets')
 depends=('qt5-base' 'qt5-x11extras' 'plasma-workspace' 'ki18n' 'knotifications' 'krunner'
          'kdeclarative' 'solid' 'kwindowsystem' 'kdbusaddons' 'kdoctools' 'kpeople' 'kio')
 makedepends=('cmake' 'git' 'extra-cmake-modules')
 source=(${pkgname}::git://anongit.kde.org/scratch/hein/simplemenu.git)
 sha1sums=('SKIP')
-
-pkgver() {
-cd "$srcdir/${pkgname}"
-printf "0+git`date +%Y%m%d`.%s"  "$(git rev-parse --short HEAD)"
-}
 
 prepare() {
         cd "$srcdir/${pkgname}"
