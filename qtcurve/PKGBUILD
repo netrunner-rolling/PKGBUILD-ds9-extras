@@ -7,7 +7,7 @@
 
 pkgbase=qtcurve
 pkgname=('qtcurve-utils-next' 'qtcurve-gtk2-next' 'qtcurve-qt4-next' 'qtcurve-qt5-next')
-pkgver=1.8.18+git20170417
+pkgver=1.8.18.294.gec221dd9
 pkgrel=1
 pkgdesc='A configurable set of widget styles for KDE and Gtk'
 arch=('i686' 'x86_64')
@@ -15,8 +15,22 @@ url='https://github.com/QtCurve/qtcurve'
 license=('LGPL')
 groups=('qtcurve')
 makedepends=('git' 'extra-cmake-modules' 'gtk2' 'qt4' 'qt5-svg' 'qt5-x11extras' 'frameworkintegration' 'kdelibs4support' 'kdesignerplugin' 'kdoctools')
-source=("git://anongit.kde.org/qtcurve.git#commit=7ddd3782ea5635cc0d6a6d292824da85ae9d1bb8")
-md5sums=('SKIP')
+source=("git://anongit.kde.org/qtcurve.git"
+                "normal_shadows.patch")
+md5sums=('SKIP'
+                     '9e85cb6c5583715b0d0e2c1d93e14ddb')
+
+pkgver() {
+  cd $pkgbase
+
+  git describe | sed -e 's/-/./g'
+}
+
+prepare() {
+  cd $pkgbase
+
+  patch -Np1 -i ../normal_shadows.patch
+}
 
 build() {
   cd $pkgbase
