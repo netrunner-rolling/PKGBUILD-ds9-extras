@@ -1,0 +1,70 @@
+# $Id$
+# Maintainer: Felix Yan <felixonmars@archlinux.org>
+# Maintainer: Antonio Rojas <arojas@archlinux.org>
+# Contributor: Andrea Scarpino <andrea@archlinux.org>
+
+pkgbase=breeze
+pkgname=('breeze-netrunner' 'breeze-kde4-netrunner')
+pkgver=5.9.5
+pkgrel=1
+arch=('i686' 'x86_64')
+url='https://www.kde.org/workspaces/plasmadesktop/'
+license=('LGPL')
+makedepends=('extra-cmake-modules' 'frameworkintegration' 'kdelibs'
+             'automoc4' 'kdecoration' 'kcmutils' 'plasma-framework' 'python')
+source=("https://download.kde.org/stable/plasma/${pkgver}/$pkgbase-$pkgver.tar.xz"
+        "nofocusIndicatorsOnclick.patch")
+sha256sums=('83312b854282636bc6d10a1e579c5a13538394b76af5963f3e79b0d235053e3d'
+            'SKIP')
+
+prepare() {
+   mkdir -p build{,-kde4}
+   cd $pkgbase-$pkgver
+   patch -Np1 -i ../nofocusIndicatorsOnclick.patch
+}
+
+build() {
+  cd build
+  cmake ../${pkgbase}-${pkgver} \
+    -DCMAKE_BUILD_TYPE=Release \
+    -DCMAKE_INSTALL_PREFIX=/usr \
+    -DKDE_INSTALL_LIBDIR=lib \
+    -DBUILD_TESTING=OFF
+  make
+
+  cd ../build-kde4
+  cmake ../${pkgbase}-${pkgver} \
+    -DCMAKE_BUILD_TYPE=Release \
+    -DCMAKE_INSTALL_PREFIX=/usr \
+    -DUSE_KDE4=ON \
+    -DBUILD_TESTING=OFF
+  make
+}
+
+package_breeze-netrunner() {
+  depends=('frameworkintegration' 'kdecoration' 'breeze-icons' 'kwayland')
+  pkgdesc='Artwork, styles and assets for the Breeze visual style for the Plasma Desktop'
+  optdepends=('breeze-kde4-netrunner: Breeze widget style for KDE4 applications'
+		'breeze-gtk: Breeze widget style for GTK applications'
+		'kcmutils: for breeze-settings')
+  groups=('plasma')
+  conflicts=('breeze')
+  provides=('breeze')
+ 
+  cd build
+  make DESTDIR="$pkgdir" install
+}
+
+package_breeze-kde4-netrunner() {
+  pkgdesc='Breeze widget style for KDE4 applications'
+  depends=('kdelibs')
+  conflicts=('breeze-kde4')
+  provides=('breeze-kde4')
+ 
+  cd build-kde4
+  make DESTDIR="$pkgdir" install
+
+  # needed for pure Qt4 apps
+  install -d "$pkgdir"/usr/lib/qt4/plugins/styles
+  ln -s /usr/lib/kde4/plugins/styles/breeze.so "$pkgdir"/usr/lib/qt4/plugins/styles
+}
