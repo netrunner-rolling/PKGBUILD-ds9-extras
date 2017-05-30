@@ -13,14 +13,23 @@ license=('LGPL')
 makedepends=('extra-cmake-modules' 'frameworkintegration' 'kdelibs'
              'automoc4' 'kdecoration' 'kcmutils' 'plasma-framework' 'python')
 source=("https://download.kde.org/stable/plasma/${pkgver}/$pkgbase-$pkgver.tar.xz"
-        "nofocusIndicatorsOnclick.patch")
+        "nofocusIndicatorsOnclick.patch"
+        "0001-Don-t-draw-blue-frame-on-Checkboxes-on-mouseover.patch"
+        "0001-Don-t-highlight-frames.patch"
+        "0001-No-item-highlight-on-mouseover.patch")
 sha256sums=('83312b854282636bc6d10a1e579c5a13538394b76af5963f3e79b0d235053e3d'
+            'SKIP'
+            'SKIP'
+            'SKIP'
             'SKIP')
 
 prepare() {
    mkdir -p build{,-kde4}
    cd $pkgbase-$pkgver
    patch -Np1 -i ../nofocusIndicatorsOnclick.patch
+   patch -Np1 -i ../0001-Don-t-draw-blue-frame-on-Checkboxes-on-mouseover.patch
+   patch -Np1 -i ../0001-Don-t-highlight-frames.patch
+   patch -Np1 -i ../0001-No-item-highlight-on-mouseover.patch
 }
 
 build() {

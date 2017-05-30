@@ -1,0 +1,25 @@
+From 5253ebe747a6432479a1e3946165b0c4c80bcbae Mon Sep 17 00:00:00 2001
+From: David Edmundson <kde@davidedmundson.co.uk>
+Date: Tue, 30 May 2017 11:30:04 +0100
+Subject: [PATCH] Don't draw blue frame on Checkboxes on mouseover
+
+---
+ kstyle/breezestyle.cpp | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/kstyle/breezestyle.cpp b/kstyle/breezestyle.cpp
+index 645bcba3..ca5e2a29 100644
+--- a/kstyle/breezestyle.cpp
++++ b/kstyle/breezestyle.cpp
+@@ -3735,7 +3735,7 @@ namespace Breeze
+         // store flags
+         const State& state( option->state );
+         const bool enabled( state & State_Enabled );
+-        const bool mouseOver( enabled && ( state & State_MouseOver ) );
++        const bool mouseOver( enabled && ( state & State_MouseOver ) && false);
+         const bool sunken( enabled && ( state & State_Sunken ) );
+         const bool active( ( state & (State_On|State_NoChange) ) );
+ 
+-- 
+2.12.0
+

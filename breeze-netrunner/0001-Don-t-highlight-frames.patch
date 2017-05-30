@@ -1,0 +1,38 @@
+From fb6b97446460d69011b9d8362297484dcaf0052d Mon Sep 17 00:00:00 2001
+From: David Edmundson <kde@davidedmundson.co.uk>
+Date: Tue, 30 May 2017 11:17:39 +0100
+Subject: [PATCH] Don't highlight frames
+
+---
+ kstyle/breezestyle.cpp | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
+
+diff --git a/kstyle/breezestyle.cpp b/kstyle/breezestyle.cpp
+index 00798a96..645bcba3 100644
+--- a/kstyle/breezestyle.cpp
++++ b/kstyle/breezestyle.cpp
+@@ -2987,8 +2987,8 @@ namespace Breeze
+         #endif
+ 
+         const bool enabled( state & State_Enabled );
+-        const bool mouseOver( enabled && isInputWidget && ( state & State_MouseOver ) );
+-        const bool hasFocus( enabled && isInputWidget && ( state & State_HasFocus ) );
++        const bool mouseOver( enabled && isInputWidget && ( state & State_MouseOver ) && false);
++        const bool hasFocus( enabled && isInputWidget && ( state & State_HasFocus ) && false);
+ 
+         // focus takes precedence over mouse over
+         _animations->inputWidgetEngine().updateState( widget, AnimationFocus, hasFocus );
+@@ -3051,8 +3051,8 @@ namespace Breeze
+             // copy state
+             const State& state( option->state );
+             const bool enabled( state & State_Enabled );
+-            const bool mouseOver( enabled && ( state & State_MouseOver ) );
+-            const bool hasFocus( enabled && ( state & State_HasFocus ) );
++            const bool mouseOver( enabled && ( state & State_MouseOver ) && false);
++            const bool hasFocus( enabled && ( state & State_HasFocus ) && false);
+ 
+             // focus takes precedence over mouse over
+             _animations->inputWidgetEngine().updateState( widget, AnimationFocus, hasFocus );
+-- 
+2.12.0
+

@@ -1,0 +1,25 @@
+From db01a97834c946c764f769ecb4348dcb6a009170 Mon Sep 17 00:00:00 2001
+From: David Edmundson <kde@davidedmundson.co.uk>
+Date: Tue, 30 May 2017 11:11:11 +0100
+Subject: [PATCH] No item highlight on mouseover
+
+---
+ kstyle/breezestyle.cpp | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/kstyle/breezestyle.cpp b/kstyle/breezestyle.cpp
+index 4bbc4a98..00798a96 100644
+--- a/kstyle/breezestyle.cpp
++++ b/kstyle/breezestyle.cpp
+@@ -3663,7 +3663,7 @@ namespace Breeze
+ 
+         // store flags
+         const State& state( option->state );
+-        const bool mouseOver( ( state & State_MouseOver ) && ( !abstractItemView || abstractItemView->selectionMode() != QAbstractItemView::NoSelection ) );
++        const bool mouseOver( false );
+         const bool selected( state & State_Selected );
+         const bool enabled( state & State_Enabled );
+         const bool active( state & State_Active );
+-- 
+2.12.0
+
