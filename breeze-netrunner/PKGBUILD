@@ -18,7 +18,7 @@ source=("https://download.kde.org/stable/plasma/${pkgver}/$pkgbase-$pkgver.tar.x
         "0001-Don-t-highlight-frames.patch"
         "0001-No-item-highlight-on-mouseover.patch"
         "0001-No-blue-frame-on-toolbuttons.patch")
-sha256sums=('c42c7597e33d5c0f633fc4bab096633e9827e9dd3006fd63aa743186dee6cd16'
+sha256sums=('7909034fece1ba17e53ec143924a6b49f240a28b9df09e0add5deb033c52dcf3'
             'SKIP'
             'SKIP'
             'SKIP'
