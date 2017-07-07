@@ -4,7 +4,7 @@
 
 _pkgname=samba-mounter
 pkgname=kcm-samba-mounter
-pkgver=0+git20170311.5b9a6d7
+pkgver=0+git20170707.b5854e7
 pkgrel=1
 pkgdesc="KDE control module mount tool for samba"
 url="https://cgit.kde.org/samba-mounter.git"
