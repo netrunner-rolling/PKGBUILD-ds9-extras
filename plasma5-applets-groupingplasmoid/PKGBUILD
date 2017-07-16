@@ -2,14 +2,14 @@
 # Maintainer: James Kittsmiller (AJSlye) <james@nulogicsystems.com>
 
 pkgname=plasma5-applets-groupingplasmoid
-pkgver=0+git20170311.7fcd4ae
+pkgver=0+git20170714.7fcd4ae
 pkgrel=1
 pkgdesc="Plasmoid to group desktop widgets together"
 arch=('x86_64')
 url="https://cgit.kde.org/scratch/davidedmundson/groupingplasmoid"
 license=('GPL')
 groups=('ds9-extras')
-depends=('ki18n' 'kiconthemes' 'kxmlgui' 'plasma-framework' 'qt5-base' 'qt5-declarative')
+depends=('ki18n' 'kiconthemes' 'kxmlgui' 'plasma-framework' 'qt5-base' 'qt5-declarative' 'qt5-quickcontrols2')
 makedepends=('cmake' 'git' 'extra-cmake-modules')
 source=('git://anongit.kde.org/scratch/davidedmundson/groupingplasmoid')
 sha1sums=('SKIP')
