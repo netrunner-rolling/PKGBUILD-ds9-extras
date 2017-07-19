@@ -1,0 +1,96 @@
+From e262daae4fafec6b995ef11b478252a3731e09cc Mon Sep 17 00:00:00 2001
+From: David Edmundson <kde@davidedmundson.co.uk>
+Date: Fri, 16 Jun 2017 12:31:05 +0100
+Subject: [PATCH] Change mouse icon on hover QAIM icons
+
+---
+ kstyle/breezestyle.cpp | 33 +++++++++++++++++++++++++++++++--
+ kstyle/breezestyle.h   |  1 +
+ 2 files changed, 32 insertions(+), 2 deletions(-)
+
+diff --git a/kstyle/breezestyle.cpp b/kstyle/breezestyle.cpp
+index e16fdafb..8478ffea 100644
+--- a/kstyle/breezestyle.cpp
++++ b/kstyle/breezestyle.cpp
+@@ -58,6 +58,10 @@
+ #include <QToolButton>
+ #include <QWidgetAction>
+ 
++#if QT_VERSION >= 0x050000
++#include <QStyleHints>
++#endif
++
+ namespace BreezePrivate
+ {
+ 
+@@ -246,10 +250,10 @@ namespace Breeze
+ 
+         if( QAbstractItemView *itemView = qobject_cast<QAbstractItemView*>( widget ) )
+         {
+-
++            itemView->setMouseTracking(true);
+             // enable mouse over effects in itemviews' viewport
+             itemView->viewport()->setAttribute( Qt::WA_Hover );
+-
++            addEventFilter( widget );
+         } else if( QGroupBox* groupBox = qobject_cast<QGroupBox*>( widget ) )  {
+ 
+             // checkable group boxes
+@@ -1001,10 +1005,15 @@ namespace Breeze
+         else if( QCommandLinkButton* commandLinkButton = qobject_cast<QCommandLinkButton*>( object ) ) { return eventFilterCommandLinkButton( commandLinkButton, event ); }
+         #endif
+         // cast to QWidget
++
+         QWidget *widget = static_cast<QWidget*>( object );
++        if (widget->inherits("QAbstractItemView")) { eventFilterItemView(static_cast<QAbstractItemView*>(widget), event);}
++        //note item can be both itemview and scroll
++
+         if( widget->inherits( "QAbstractScrollArea" ) || widget->inherits( "KTextEditor::View" ) ) { return eventFilterScrollArea( widget, event ); }
+         else if( widget->inherits( "QComboBoxPrivateContainer" ) ) { return eventFilterComboBoxContainer( widget, event ); }
+ 
++
+         // fallback
+         return ParentStyleClass::eventFilter( object, event );
+ 
+@@ -1227,6 +1236,26 @@ namespace Breeze
+ 
+     }
+ 
++    bool Style::eventFilterItemView(QAbstractItemView *view, QEvent *event)
++    {
++    #if QT_VERSION >= 0x050000
++        if (!qApp->styleHints()->singleClickActivation()) {
++            return false;
++        }
++    #else
++        return false;
++    #endif
++        if (event->type() == QEvent::HoverMove) {
++            QHoverEvent *me  = static_cast<QHoverEvent*>(event);
++            if (view->indexAt(me->pos()).isValid()) {
++                    view->setCursor(Qt::PointingHandCursor);
++                } else {
++                    view->unsetCursor();
++                }
++            }
++        return false;
++    }
++
+     //____________________________________________________________________________
+     #if QT_VERSION >= 0x050000
+     bool Style::eventFilterCommandLinkButton( QCommandLinkButton* button, QEvent* event )
+diff --git a/kstyle/breezestyle.h b/kstyle/breezestyle.h
+index ec584773..1872ba4c 100644
+--- a/kstyle/breezestyle.h
++++ b/kstyle/breezestyle.h
+@@ -144,6 +144,7 @@ namespace Breeze
+         bool eventFilterComboBoxContainer( QWidget*, QEvent* );
+         bool eventFilterDockWidget( QDockWidget*, QEvent* );
+         bool eventFilterMdiSubWindow( QMdiSubWindow*, QEvent* );
++        bool eventFilterItemView( QAbstractItemView*, QEvent *);
+ 
+         #if QT_VERSION >= 0x050000
+         bool eventFilterCommandLinkButton( QCommandLinkButton*, QEvent* );
+-- 
+2.12.0
+
