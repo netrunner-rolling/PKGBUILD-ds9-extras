@@ -23,35 +23,6 @@ index e16fdafb..8478ffea 100644
  namespace BreezePrivate
  {
  
-@@ -246,10 +250,10 @@ namespace Breeze
- 
-         if( QAbstractItemView *itemView = qobject_cast<QAbstractItemView*>( widget ) )
-         {
--
-+            itemView->setMouseTracking(true);
-             // enable mouse over effects in itemviews' viewport
-             itemView->viewport()->setAttribute( Qt::WA_Hover );
--
-+            addEventFilter( widget );
-         } else if( QGroupBox* groupBox = qobject_cast<QGroupBox*>( widget ) )  {
- 
-             // checkable group boxes
-@@ -1001,10 +1005,15 @@ namespace Breeze
-         else if( QCommandLinkButton* commandLinkButton = qobject_cast<QCommandLinkButton*>( object ) ) { return eventFilterCommandLinkButton( commandLinkButton, event ); }
-         #endif
-         // cast to QWidget
-+
-         QWidget *widget = static_cast<QWidget*>( object );
-+        if (widget->inherits("QAbstractItemView")) { eventFilterItemView(static_cast<QAbstractItemView*>(widget), event);}
-+        //note item can be both itemview and scroll
-+
-         if( widget->inherits( "QAbstractScrollArea" ) || widget->inherits( "KTextEditor::View" ) ) { return eventFilterScrollArea( widget, event ); }
-         else if( widget->inherits( "QComboBoxPrivateContainer" ) ) { return eventFilterComboBoxContainer( widget, event ); }
- 
-+
-         // fallback
-         return ParentStyleClass::eventFilter( object, event );
- 
 @@ -1227,6 +1236,26 @@ namespace Breeze
  
      }

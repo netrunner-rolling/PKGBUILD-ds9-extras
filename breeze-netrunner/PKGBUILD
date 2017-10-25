@@ -14,11 +14,13 @@ makedepends=('extra-cmake-modules' 'frameworkintegration' 'kdelibs'
              'automoc4' 'kdecoration' 'kcmutils' 'plasma-framework' 'python')
 source=("https://download.kde.org/stable/plasma/${pkgver}/$pkgbase-$pkgver.tar.xz"
         "nofocusIndicatorsOnclick.patch"
+        "0001-Change-mouse-icon-on-hover-QAIM-icons.patch"
         "0001-Don-t-draw-blue-frame-on-Checkboxes-on-mouseover.patch"
         "0001-Don-t-highlight-frames.patch"
         "0001-No-item-highlight-on-mouseover.patch"
         "0001-No-blue-frame-on-toolbuttons.patch")
-sha256sums=('1ba46701e13f983b97c7e7dd01da8637a2f17ee818928064f4729895ac1dac66'
+sha256sums=('d46449e0845f46e5e4ba6a7e0976701e08c16c271e3bfd189a2c56d7e9370180'
+            'SKIP'
             'SKIP'
             'SKIP'
             'SKIP'
@@ -29,13 +31,14 @@ prepare() {
    mkdir -p build{,-kde4}
    cd $pkgbase-$pkgver
    patch -Np1 -i ../nofocusIndicatorsOnclick.patch
+   patch -Np1 -i ../0001-Change-mouse-icon-on-hover-QAIM-icons.patch
    patch -Np1 -i ../0001-Don-t-draw-blue-frame-on-Checkboxes-on-mouseover.patch
    patch -Np1 -i ../0001-Don-t-highlight-frames.patch
    patch -Np1 -i ../0001-No-item-highlight-on-mouseover.patch
    patch -Np1 -i ../0001-No-blue-frame-on-toolbuttons.patch
 }
 
-build() {
+ build() {
   cd build
   cmake ../${pkgbase}-${pkgver} \
     -DCMAKE_BUILD_TYPE=Release \

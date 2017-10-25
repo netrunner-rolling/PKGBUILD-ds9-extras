@@ -77,30 +77,6 @@ index f097a78..66081b3 100644
  
          const AnimationMode mode( _animations->widgetStateEngine().buttonAnimationMode( widget ) );
          const qreal opacity( _animations->widgetStateEngine().buttonOpacity( widget ) );
-@@ -3424,7 +3440,7 @@ namespace Breeze
- 
-             // define colors and render
-             const QPalette& palette( option->palette );
--            const QColor color( _helper->toolButtonColor( palette, mouseOver, hasFocus, sunken, opacity, mode ) );
-+            const QColor color( _helper->toolButtonColor( palette, mouseOver, hasFocusFromKeyboard, sunken, opacity, mode ) );
-             _helper->renderToolButtonFrame( painter, rect, color, sunken );
- 
-         } else {
-@@ -3439,11 +3455,11 @@ namespace Breeze
-             }
- 
-             const QColor shadow( _helper->shadowColor( palette ) );
--            const QColor outline( _helper->buttonOutlineColor( palette, mouseOver, hasFocus, opacity, mode ) );
--            const QColor background( _helper->buttonBackgroundColor( palette, mouseOver, hasFocus, sunken, opacity, mode ) );
-+            const QColor outline( _helper->buttonOutlineColor( palette, mouseOver, hasFocusFromKeyboard, opacity, mode ) );
-+            const QColor background( _helper->buttonBackgroundColor( palette, mouseOver, hasFocusFromKeyboard, sunken, opacity, mode ) );
- 
-             // render
--            _helper->renderButtonFrame( painter, rect, background, outline, shadow, hasFocus, sunken );
-+            _helper->renderButtonFrame( painter, rect, background, outline, shadow, hasFocusFromKeyboard, sunken );
- 
-         }
- 
 @@ -4123,6 +4139,8 @@ namespace Breeze
          const bool mouseOver( enabled && (option->state & State_MouseOver) );
          const bool hasFocus( enabled && !mouseOver && (option->state & State_HasFocus) );
@@ -207,41 +183,6 @@ index f097a78..66081b3 100644
          bool flat( !comboBoxOption->frame );
  
          // frame
-@@ -5982,29 +6009,28 @@ namespace Breeze
-                 }
- 
-             } else {
--
-                 // update animation state
-                 // hover takes precedence over focus
-                 _animations->inputWidgetEngine().updateState( widget, AnimationHover, mouseOver );
--                _animations->inputWidgetEngine().updateState( widget, AnimationFocus, hasFocus && !mouseOver );
-+                _animations->inputWidgetEngine().updateState( widget, AnimationFocus, hasFocusFromKeyboard && !mouseOver );
-                 const AnimationMode mode( _animations->inputWidgetEngine().buttonAnimationMode( widget ) );
-                 const qreal opacity( _animations->inputWidgetEngine().buttonOpacity( widget ) );
- 
-                 if( flat ) {
- 
-                     // define colors and render
--                    const QColor color( _helper->toolButtonColor( palette, mouseOver, hasFocus, sunken, opacity, mode ) );
-+                    const QColor color( _helper->toolButtonColor( palette, mouseOver, hasFocusFromKeyboard, sunken, opacity, mode ) );
-                     _helper->renderToolButtonFrame( painter, rect, color, sunken );
- 
-                 } else {
- 
-                     // define colors
-                     const QColor shadow( _helper->shadowColor( palette ) );
--                    const QColor outline( _helper->buttonOutlineColor( palette, mouseOver, hasFocus, opacity, mode ) );
--                    const QColor background( _helper->buttonBackgroundColor( palette, mouseOver, hasFocus, false, opacity, mode ) );
-+                    const QColor outline( _helper->buttonOutlineColor( palette, mouseOver, hasFocusFromKeyboard, opacity, mode ) );
-+                    const QColor background( _helper->buttonBackgroundColor( palette, mouseOver, hasFocusFromKeyboard, false, opacity, mode ) );
- 
-                     // render
--                    _helper->renderButtonFrame( painter, rect, background, outline, shadow, hasFocus, sunken );
-+                    _helper->renderButtonFrame( painter, rect, background, outline, shadow, hasFocusFromKeyboard, sunken );
- 
-                 }
- 
 @@ -6058,7 +6084,7 @@ namespace Breeze
                  else arrowColor = _helper->arrowColor( palette, QPalette::WindowText );
  
