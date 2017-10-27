@@ -5,7 +5,7 @@
 
 pkgbase=breeze
 pkgname=('breeze-netrunner' 'breeze-kde4-netrunner')
-pkgver=5.11.0
+pkgver=5.11.2
 pkgrel=1
 arch=('i686' 'x86_64')
 url='https://www.kde.org/workspaces/plasmadesktop/'
@@ -19,7 +19,7 @@ source=("https://download.kde.org/stable/plasma/${pkgver}/$pkgbase-$pkgver.tar.x
         "0001-Don-t-highlight-frames.patch"
         "0001-No-item-highlight-on-mouseover.patch"
         "0001-No-blue-frame-on-toolbuttons.patch")
-sha256sums=('d46449e0845f46e5e4ba6a7e0976701e08c16c271e3bfd189a2c56d7e9370180'
+sha256sums=('014505f87ce0ae90eb0e6e820e5eb9fa18bd30cac6fdb4a3df84bf53cc6d65f3'
             'SKIP'
             'SKIP'
             'SKIP'
