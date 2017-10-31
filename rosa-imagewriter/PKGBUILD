@@ -1,0 +1,29 @@
+# Maintainer: James Kittsmiller (AJSlye) ,james@nulogicsystems.com>
+
+pkgname=rosa-imagewriter
+pkgver=2.6.2.0
+pkgrel=1
+pkgdesc="Utility for writing raw disk images and hybrid isos to USB keys"
+arch=('x86_64')
+url="https://abf.io/soft/rosa-imagewriter"
+license=('GPLv3')
+depends=('qt5-base' 'qt5-tools' 'qt5-translations')
+source=('http://wiki.rosalab.ru/en/images/7/7f/RosaImageWriter-2.6.2-lin-x86_64.tar.xz'
+        'rosa-imagewriter.desktop'
+        'rosa-imagewriter.svg')
+md5sums=('b7cd2de346410ad10d7996b9c86a7d9d'
+         'aa1d601c5ddcabe26c088da5df74c4a6'
+         '348d2e06869b02f13708fce68ab1bed5')
+
+package() {
+  
+  install -Dm755 "${srcdir}"/RosaImageWriter/RosaImageWriter \
+  "${pkgdir}"/usr/bin/rosa-imagewriter
+  
+  install -Dm0644 "${srcdir}"/$pkgname.desktop \
+  "${pkgdir}"/usr/share/applications/$pkgname.desktop
+  
+  install -D -m0644 "${srcdir}"/$pkgname.svg \
+  "${pkgdir}"/usr/share/icons/hicolor/scalable/apps/$pkgname.svg
+}
+
