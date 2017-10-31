@@ -12,7 +12,7 @@ source=('http://wiki.rosalab.ru/en/images/7/7f/RosaImageWriter-2.6.2-lin-x86_64.
         'rosa-imagewriter.desktop'
         'rosa-imagewriter.svg')
 md5sums=('b7cd2de346410ad10d7996b9c86a7d9d'
-         'aa1d601c5ddcabe26c088da5df74c4a6'
+         'd8485447a341d0d4de3b0902b611253f'
          '348d2e06869b02f13708fce68ab1bed5')
 
 package() {

@@ -1,5 +1,6 @@
+#!/usr/bin/env xdg-open
 [Desktop Entry]
-Categories=System;Utility;Archiving;
+Categories=Utility
 Comment[en_US]=Write disk image to USB key
 Comment=Write disk image to USB key
 Comment[ru]=Запись образа диска на USB-накопитель
