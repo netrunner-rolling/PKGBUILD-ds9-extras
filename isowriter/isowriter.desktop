@@ -1,0 +1,11 @@
+#!/usr/bin/env xdg-open
+[Desktop Entry]
+Type=Application
+Categories=Utility
+X-KDE-RootOnly=true
+Exec=xdg-su -s IsoWriter %F
+Icon=icon-iw
+Name=ISO Writer
+Comment=Tool for creating bootable installation USB flash drives
+GenericName=USB key writer 
+Version=1.0 

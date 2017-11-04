@@ -1,0 +1,27 @@
+# $Id$
+# Maintainer: James Kittsmiller (AJSlye) <james@nulogicsystems.com>
+
+pkgname=isowriter
+pkgver=1.2.1
+pkgrel=1
+pkgdesc="Tool for creating bootable installation USB flash drives"
+arch=('x86_64')
+url="https://github.com/KaOSx/isowriter"
+license=('GPLv2')
+depends=('qt5-base' 'kdialog')
+makedepends=('git' 'libtool')
+options=('libtool')
+source=("http://kaosx.tk/repo/apps/$pkgname-$pkgver-$pkgrel-$arch.pkg.tar.xz"
+        'isowriter.desktop'
+        'iw_write_iso.desktop')
+md5sums=('SKIP'
+         'SKIP'
+         'SKIP')
+
+package() {
+  cd "${srcdir}"
+  cp -aR usr "${pkgdir}"/
+
+ install -Dm644 "${srcdir}"/isowriter.desktop "${pkgdir}"/usr/share/applications
+ install -Dm644 "${srcdir}"/iw_write_iso.desktop "${pkgdir}"/usr/share/kservice5/ServiceMenues/iw_write_iso.desktop
+} 
