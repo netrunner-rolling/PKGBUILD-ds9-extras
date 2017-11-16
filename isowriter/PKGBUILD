@@ -11,17 +11,10 @@ license=('GPLv2')
 depends=('qt5-base' 'kdialog')
 makedepends=('git' 'libtool')
 options=('libtool')
-source=("http://kaosx.tk/repo/apps/$pkgname-$pkgver-$pkgrel-$arch.pkg.tar.xz"
-        'isowriter.desktop'
-        'iw_write_iso.desktop')
-md5sums=('SKIP'
-         'SKIP'
-         'SKIP')
+source=("http://kaosx.tk/repo/apps/$pkgname-$pkgver-$pkgrel-$arch.pkg.tar.xz")
+sha256sums=('6ed37c676f9a3b3f4a2cfb40959c26e45bf2d2b13bdb6f6ce514bff1f0e8822b')
 
 package() {
   cd "${srcdir}"
   cp -aR usr "${pkgdir}"/
-
- install -Dm644 "${srcdir}"/isowriter.desktop "${pkgdir}"/usr/share/applications
- install -Dm644 "${srcdir}"/iw_write_iso.desktop "${pkgdir}"/usr/share/kservice5/ServiceMenues/iw_write_iso.desktop
 } 
