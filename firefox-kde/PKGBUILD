@@ -1,0 +1,8 @@
+pkgname=firefox-kde
+pkgver=57.0.2
+pkgrel=1
+pkgdesc="Transitianal package"
+arch=(x86_64)
+license=(MPL GPL LGPL)
+url="https://www.mozilla.org/firefox/"
+depends=("firefox")
