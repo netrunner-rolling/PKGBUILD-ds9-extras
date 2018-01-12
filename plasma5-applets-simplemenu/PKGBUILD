@@ -2,7 +2,7 @@
 # Maintainer: James Kittsmiller (AJSlye) <james@nulogicsystems.com>
 
 pkgname=plasma5-applets-simplemenu
-pkgver=1.0.2
+pkgver=1.0.7
 pkgrel=1
 pkgdesc="Simple menu launcher, similar to the one on Chrome OS"
 arch=('x86_64')
@@ -28,6 +28,7 @@ build() {
         -DCMAKE_INSTALL_PREFIX=/usr \
         -DCMAKE_BUILD_TYPE=Release \
         -DKDE_INSTALL_LIBDIR=lib
+        
         make
 }
 
