@@ -1,0 +1,33 @@
+# $Id$
+# Maintainer: James Kittsmiller (AJSlye) <james@nulogicsystems.com>
+
+pkgname=ksystraycmd
+pkgver=1.0
+pkgrel=1
+pkgdesc="KSysTrayCmd is a utility that allows you to run any application you
+like in the system tray, not just those designed to use it."
+arch=('i686' 'x86_64')
+url='https://cgit.kde.org/scratch/hein/ksystraycmd.git'
+license=('GPL')
+groups=('ds9-extras')
+depends=('kcoreaddons' 'ki18n' 'kwindowsystem')
+makedepends=('cmake' 'git' 'pkg-config')
+source=('git://anongit.kde.org/scratch/hein/ksystraycmd.git')
+md5sums=('SKIP')
+
+pkgver() {
+cd "$srcdir/$pkgname"
+printf "0+git`date +%Y%m%d`.%s"  "$(git rev-parse --short HEAD)"
+}
+
+build() {
+  cd $srcdir/$pkgname
+  rm -rf build && mkdir build && cd build
+  cmake -DCMAKE_INSTALL_PREFIX=/usr -DLIB_INSTALL_DIR=/usr/lib ..
+  make
+}
+
+package() {
+  cd $srcdir/$pkgname/build 
+  make DESTDIR=$pkgdir install
+}
