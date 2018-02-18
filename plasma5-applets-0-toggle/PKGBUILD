@@ -2,7 +2,7 @@
 # Maintainer: James Kittsmiller (AJSlye) <james@nulogicsystems.com>
 
 pkgname=plasma5-applets-0-toggle
-pkgver=0+git20170311.21b0cf8
+pkgver=0+git20180218.561f737
 pkgrel=1
 pkgdesc="Plasmoid to control ZeroNet on your Plasma 5 Desktop"
 arch=('x86_64')
