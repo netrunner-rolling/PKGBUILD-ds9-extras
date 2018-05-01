@@ -4,7 +4,7 @@
 _pkgname=AppImageLauncher
 pkgname=appimagelauncher
 pkgver=1alpha+git20180430.1165a63
-pkgrel=1
+pkgrel=2
 pkgdesc="A Helper application for running and integrating AppImages."
 arch=('x86_64')
 url="https://github.com/TheAssassin/AppImageLauncher"
@@ -43,4 +43,9 @@ package() {
 
   # install license files
   install -Dm644 LICENSE.txt "$pkgdir/usr/share/licenses/$pkgname/LICENSE"
+
+  cd "$srcdir"
+
+  # Install pacman hook
+  install -Dm644 -t "$pkgdir"/usr/share/libalpm/hooks *.hook
 }
