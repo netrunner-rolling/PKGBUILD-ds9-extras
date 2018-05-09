@@ -2,7 +2,7 @@
 # Maintainer: James Kittsmiller (AJSlye) <james@nulogicsystems.com>
 
 pkgname=kcm-about-extended
-pkgver=0+git20180105.f85e06c
+pkgver=0+git20180509.f85e06c
 pkgrel=1
 pkgdesc='Extended version of the about-distro module'
 arch=('i686' 'x86_64')
