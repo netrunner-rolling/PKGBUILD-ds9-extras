@@ -2,7 +2,7 @@
 # Maintainer: James Kittsmiller (AJSlye) <james@nulogicsystems.com>
 
 pkgname=plasma5-applets-simplemenu
-pkgver=1.0.10
+pkgver=1.0.12
 pkgrel=1
 pkgdesc="Simple menu launcher, similar to the one on Chrome OS"
 arch=('x86_64')
