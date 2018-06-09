@@ -3,7 +3,7 @@
 
 _pkgname=AppImageLauncher
 pkgname=appimagelauncher
-pkgver=1alpha+git20180508.f871b20
+pkgver=1alpha+git20180608.7b0826d
 pkgrel=1
 pkgdesc="A Helper application for running and integrating AppImages."
 arch=('x86_64')
