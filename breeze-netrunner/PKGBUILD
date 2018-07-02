@@ -5,81 +5,18 @@
 
 pkgbase=breeze
 pkgname=('breeze-netrunner' 'breeze-kde4-netrunner')
-pkgver=5.12.5
+pkgver=5.13.2
 pkgrel=1
 arch=('i686' 'x86_64')
 url='https://www.kde.org/workspaces/plasmadesktop/'
 license=('LGPL')
-makedepends=('extra-cmake-modules' 'frameworkintegration' 'kdelibs'
-             'automoc4' 'kdecoration' 'kcmutils' 'plasma-framework' 'python')
-source=("https://download.kde.org/stable/plasma/${pkgver}/$pkgbase-$pkgver.tar.xz"
-        "nofocusIndicatorsOnclick.patch"
-        "0001-Change-mouse-icon-on-hover-QAIM-icons.patch"
-        "0001-Don-t-draw-blue-frame-on-Checkboxes-on-mouseover.patch"
-        "0001-Don-t-highlight-frames.patch"
-        "0001-No-item-highlight-on-mouseover.patch"
-        "0001-No-blue-frame-on-toolbuttons.patch")
-sha256sums=('764c1d174f5a2844a7144995b05b179a2d161d65f74d45ca353b524807f6aff7'
-            'SKIP'
-            'SKIP'
-            'SKIP'
-            'SKIP'
-            'SKIP'
-            'SKIP')
-
-prepare() {
-   mkdir -p build{,-kde4}
-   cd $pkgbase-$pkgver
-   patch -Np1 -i ../nofocusIndicatorsOnclick.patch
-   patch -Np1 -i ../0001-Change-mouse-icon-on-hover-QAIM-icons.patch
-   patch -Np1 -i ../0001-Don-t-draw-blue-frame-on-Checkboxes-on-mouseover.patch
-   patch -Np1 -i ../0001-Don-t-highlight-frames.patch
-   patch -Np1 -i ../0001-No-item-highlight-on-mouseover.patch
-   patch -Np1 -i ../0001-No-blue-frame-on-toolbuttons.patch
-}
-
- build() {
-  cd build
-  cmake ../${pkgbase}-${pkgver} \
-    -DCMAKE_BUILD_TYPE=Release \
-    -DCMAKE_INSTALL_PREFIX=/usr \
-    -DKDE_INSTALL_LIBDIR=lib \
-    -DBUILD_TESTING=OFF
-  make
-
-  cd ../build-kde4
-  cmake ../${pkgbase}-${pkgver} \
-    -DCMAKE_BUILD_TYPE=Release \
-    -DCMAKE_INSTALL_PREFIX=/usr \
-    -DUSE_KDE4=ON \
-    -DBUILD_TESTING=OFF
-  make
-}
 
 package_breeze-netrunner() {
-  depends=('frameworkintegration' 'kdecoration' 'breeze-icons' 'kwayland')
-  pkgdesc='Artwork, styles and assets for the Breeze visual style for the Plasma Desktop'
-  optdepends=('breeze-kde4-netrunner: Breeze widget style for KDE4 applications'
-		'breeze-gtk: Breeze widget style for GTK applications'
-		'kcmutils: for breeze-settings')
-  groups=('plasma')
-  conflicts=('breeze')
-  provides=('breeze')
- 
-  cd build
-  make DESTDIR="$pkgdir" install
+  depends=('breeze')
+  pkgdesc='Transitional package for breeze-netrunner'
 }
 
 package_breeze-kde4-netrunner() {
-  pkgdesc='Breeze widget style for KDE4 applications'
-  depends=('kdelibs')
-  conflicts=('breeze-kde4')
-  provides=('breeze-kde4')
- 
-  cd build-kde4
-  make DESTDIR="$pkgdir" install
-
-  # needed for pure Qt4 apps
-  install -d "$pkgdir"/usr/lib/qt4/plugins/styles
-  ln -s /usr/lib/kde4/plugins/styles/breeze.so "$pkgdir"/usr/lib/qt4/plugins/styles
+  pkgdesc='Transitional package for breeze-kde-netrunner'
+  depends=('breeze-kde4')
 }
