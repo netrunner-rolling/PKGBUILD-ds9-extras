@@ -1,0 +1,19 @@
+# Maintainer: James Kittsmiller (AJSlye) <james@nulogicsystems.com>
+ 
+pkgname=kwin-scripts-force-decorations-gtk3
+_pkgname=force-decorations-gtk3
+pkgver=0.2
+pkgrel=1
+pkgdesc="Tiling script for kwin"
+arch=('any')
+url="https://store.kde.org/content/show.php?content=161151"
+license=('GPL2')
+depends=('kwin')
+source=("force-decorations-gtk3.kwinscript")
+sha256sums=('148cf20899b9e25e633f390b0bd2efd60d2cf158d30304cd2e92c7bd4d91a168')
+
+package() {
+  install -d "${pkgdir}/usr/share/kwin/scripts/${_pkgname}"
+  cp -r "${srcdir}/${_pkgname}"/{contents,metadata.desktop} "${pkgdir}/usr/share/kwin/scripts/${_pkgname}"
+  install -Dm644 "${srcdir}/${_pkgname}/metadata.desktop" "${pkgdir}/usr/share/kservices5/${_pkgname}.desktop"
+}
