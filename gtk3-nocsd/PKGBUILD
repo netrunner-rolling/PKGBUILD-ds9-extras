@@ -1,0 +1,36 @@
+# Maintainer: Kazutoshi Noguchi <noguchi.kazutosi+lGlcOenS [at] gmail [dot] com>
+# Contributor: Marco Kundt <mrckndt [at] gmail [dot] com>
+# Maintainer: James Kittsmiller (AJSlye) <james@nulogicsystems.com>
+
+pkgname=gtk3-nocsd
+pkgver=3
+pkgrel=1
+pkgdesc='A hack to disable gtk+ 3 client side decoration'
+arch=('i686' 'x86_64')
+url='https://github.com/PCMan/gtk3-nocsd'
+license=('LGPL')
+depends=('gtk3')
+makedepends=('git' 'gobject-introspection')
+source=(https://github.com/PCMan/gtk3-nocsd/archive/v$pkgver.tar.gz
+        30-gtk3-nocsd.sh)
+sha256sums=('779c47d894ee3b6751ddb02b62a76757b77eb81232c4f9335564654817889570'
+            'da498916ffc29b1d13de43271a46c0c2582c4cdad8d1ddd15217b868f83d86e8')
+
+_pkgname=gtk3-nocsd-$pkgver
+
+build() {
+  cd "$srcdir/$_pkgname"
+  make
+}
+
+package() {
+  cd "$srcdir/$_pkgname"
+  install -D -m 0755 gtk3-nocsd "${pkgdir}"/usr/bin/gtk3-nocsd
+  install -D -m 0644 gtk3-nocsd.1 "${pkgdir}"/usr/share/man/man1/gtk3-nocsd.1
+  install -D -m 0644 gtk3-nocsd.bash-completion "${pkgdir}"/usr/share/bash-completion/completions/gtk3-nocsd
+
+  install -D -m 0644 libgtk3-nocsd.so.0 "${pkgdir}"/usr/lib/libgtk3-nocsd.so.0
+
+  cd "$srcdir"
+  install -D -m 0755 30-gtk3-nocsd.sh "${pkgdir}"/etc/X11/xinit/xinitrc.d/30-gtk3-nocsd.sh
+}
