@@ -1,0 +1,19 @@
+# $Id$
+# Maintainer: James Kittsmiller (AJSlye) <james@nulogicsystems.com>
+
+pkgname=web-menu-entries
+pkgver=$(date +%Y.%m)
+pkgrel=1
+pkgdesc='Adds menu entries with logo into new category "Web"'
+arch=('any')
+url='https://github.com/ds9-extras/kcm-about-extended'
+license=('LGPL')
+groups=('ds9-extras')
+makedepends=('git')
+source=('git://github.com/ds9-extras/web-menu-entries')
+md5sums=('SKIP')
+
+package() {
+  cd $srcdir/$pkgname
+  cp -aR usr $pkgdir/
+}
