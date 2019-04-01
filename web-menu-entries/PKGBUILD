@@ -10,6 +10,7 @@ url='https://github.com/ds9-extras/kcm-about-extended'
 license=('LGPL')
 groups=('ds9-extras')
 makedepends=('git')
+install=web-menu-entries.install
 source=('git://github.com/ds9-extras/web-menu-entries')
 md5sums=('SKIP')
 

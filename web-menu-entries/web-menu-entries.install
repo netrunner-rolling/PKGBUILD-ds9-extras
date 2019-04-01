@@ -1,0 +1,19 @@
+post_install() {
+    xdg-desktop-menu install /usr/share/desktop-directories/netrunner-web.directory /usr/share/applications/hooktube.desktop --novendor
+    xdg-desktop-menu install /usr/share/desktop-directories/netrunner-web.directory /usr/share/applications/telegram.desktop --novendor
+    xdg-desktop-menu install /usr/share/desktop-directories/netrunner-web.directory /usr/share/applications/whatsapp.desktop --novendor
+    xdg-desktop-menu install /usr/share/desktop-directories/netrunner-web.directory /usr/share/applications/skype-web.desktop --novendor
+    xdg-desktop-menu install /usr/share/desktop-directories/netrunner-web.directory /usr/share/applications/opendesktop.desktop --novendor
+}
+
+post_upgrade() {
+        post_install
+}
+
+post_remove() {
+    xdg-desktop-menu uninstall /usr/share/desktop-directories/netrunner-web.directory /usr/share/applications/hooktube.desktop --novendor
+    xdg-desktop-menu uninstall /usr/share/desktop-directories/netrunner-web.directory /usr/share/applications/telegram.desktop --novendor
+    xdg-desktop-menu uninstall /usr/share/desktop-directories/netrunner-web.directory /usr/share/applications/whatsapp.desktop --novendor
+    xdg-desktop-menu uninstall /usr/share/desktop-directories/netrunner-web.directory /usr/share/applications/skype-web.desktop --novendor
+    xdg-desktop-menu uninstall /usr/share/desktop-directories/netrunner-web.directory /usr/share/applications/opendesktop.desktop --novendor
+}
