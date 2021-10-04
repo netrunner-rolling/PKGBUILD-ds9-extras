@@ -4,17 +4,17 @@
 
 _pkgname=samba-mounter
 pkgname=kcm-samba-mounter
-pkgver=0+git20180509.3240cc9
+pkgver=0+git20210921.45bc456
 pkgrel=1
 pkgdesc="KDE control module mount tool for samba"
-url="https://cgit.kde.org/samba-mounter.git"
+url="https://invent.kde.org/system/samba-mounter"
 arch=('i686' 'x86_64')
 license=('GPL')
 groups=('ds9-extras')
 depends=('kauth' 'cifs-utils' 'smbclient' 'kcmutils' 'kconfig' 'kio' 'ki18n' 'solid')
 makedepends=('cmake' 'git' 'extra-cmake-modules')
 replaces=('samba-mounter' 'samba-mounter-git' 'samba-mounter-frameworks-git')
-source=("git://anongit.kde.org/samba-mounter.git")
+source=("git+https://invent.kde.org/system/samba-mounter")
 sha256sums=('SKIP')
 
 pkgver() {

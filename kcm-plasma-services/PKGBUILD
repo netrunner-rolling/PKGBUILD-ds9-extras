@@ -2,7 +2,7 @@
 # Maintainer: James Kittsmiller (AJSlye) <james@nulogicsystems.com>
 
 pkgname=kcm-plasma-services
-pkgver=0+git20170311.a4db58f
+pkgver=0+git20210921.a4db58f
 pkgrel=1
 pkgdesc='Easily turn on/off certain Plasma Services'
 arch=('i686' 'x86_64')
